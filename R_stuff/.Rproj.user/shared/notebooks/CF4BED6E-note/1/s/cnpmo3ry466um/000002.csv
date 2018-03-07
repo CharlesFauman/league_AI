@@ -1,0 +1,6 @@
+"0","win_with <- function(champ_win, champ_lose){"
+"0","  champ_data = train_data[,c(champ_win,champ_lose)]"
+"0","  wins = length(champ_data[champ_data[,champ_win] > 0 & champ_data[,champ_lose] > 0])"
+"0","  losses = length(champ_data[champ_data[,champ_win] < 0 & champ_data[,champ_lose] < 0])"
+"0","  return(c(wins, losses, wins + losses, (wins/(wins + losses))))"
+"0","}"

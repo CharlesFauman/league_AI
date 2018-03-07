@@ -1,0 +1,1 @@
+"0","train_data <- as.matrix(read.csv(""C:/Users/faumac/Desktop/league AI/data/train_data_r.csv"", header = TRUE, row.names = 1))"

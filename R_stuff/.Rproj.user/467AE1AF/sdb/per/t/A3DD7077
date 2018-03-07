@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "---\ntitle: \"R Notebook\"\noutput: html_notebook\n---\n\n```{r}\nlibrary(readr)\nlibrary(\"ggbiplot\")\nlibrary(\"gtools\")\nlibrary(plyr)\n```\n\n\n\n```{r}\ntrain_data <- as.matrix(read.csv(\"C:/Users/faumac/Desktop/league AI/data/train_data_r.csv\", header = TRUE, row.names = 1))\n```\n\n```{r}\ntrain_data.scaled = scale(train_data, center = FALSE)\n```\n\n\n```{r}\npercentage_win_by_champ <- function(champ_name){\n  champ_data = train_data[,champ_name]\n  wins = length(champ_data[champ_data > 0])\n  losses = length(champ_data[champ_data < 0])\n  return(c(wins, losses, wins + losses, (wins/(wins + losses))))\n}\n```\n\n```{r}\nwin_vs <- function(champ_win, champ_lose){\n  champ_data = train_data[,c(champ_win,champ_lose)]\n  wins = length(champ_data[champ_data[,champ_win] > 0 & champ_data[,champ_lose] < 0])\n  losses = length(champ_data[champ_data[,champ_win] < 0 & champ_data[,champ_lose] > 0])\n  return(c(wins, losses, wins + losses, (wins/(wins + losses))))\n}\n```\n\n```{r}\nwin_with <- function(champ_win, champ_lose){\n  champ_data = train_data[,c(champ_win,champ_lose)]\n  wins = length(champ_data[champ_data[,champ_win] > 0 & champ_data[,champ_lose] > 0])\n  losses = length(champ_data[champ_data[,champ_win] < 0 & champ_data[,champ_lose] < 0])\n  return(c(wins, losses, wins + losses, (wins/(wins + losses))))\n}\n```\n\n```{r}\nall_champs <- colnames(train_data)\n```\n\n```{r}\npercentage_wins <- t(sapply(all_champs, percentage_win_by_champ))\n```\n\n```{r}\nall_wins_vs.list <- sapply(all_champs, function(champ){\n  ans <- sapply(all_champs, win_vs, champ_win=champ)\n  return(as.matrix(ans[,ans[3,]>=50])[4,])\n})\nall_wins_vs.matrix <- rbind.fill(lapply(all_wins_vs.list,function(y){as.data.frame(t(y),stringsAsFactors=FALSE)}))\nrownames(all_wins_vs.matrix) <- all_champs\n```\n\n```{r}\nall_wins_with.list <- sapply(all_champs, function(champ){\n  ans <- sapply(all_champs, win_with, champ_win=champ)\n  return(as.matrix(ans[,ans[3,]>=50])[4,])\n})\nall_wins_with.matrix <- rbind.fill(lapply(all_wins_with.list,function(y){as.data.frame(t(y),stringsAsFactors=FALSE)}))\nrownames(all_wins_with.matrix) <- all_champs\n```\n\n```{r}\nsort(all_wins_vs.list[[\"Janna\"]], decreasing = FALSE)\n```\n\n\n```{r}\n#pca\ntrain_data.pca <- prcomp(train_data,retx=TRUE,center=FALSE, scale=FALSE)\n# Make Scree plot\nscreeplot(train_data.pca, npcs=139, type=\"lines\",main=\"train data PCA Variance by Principal Component\")\n# Examine  summary by importance\nView(summary(train_data.pca)$importance)\n```\n\n\n\n```{r}\np <- ggbiplot(train_data.pca,\n            choices=c(1,2),\n            alpha=.4,\n            varname.adjust=3,\n            var.axes = 0\n            )\np + ggtitle('train data Biplot of PC1 and PC2') +  coord_cartesian(xlim=c(-2.5,2.5), ylim=c(-2.5,2.5))\n```\n\n",
+    "created" : 1520350570037.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1525810623",
+    "id" : "A3DD7077",
+    "lastKnownWriteTime" : 1520381388,
+    "last_content_update" : 1520381388205,
+    "path" : "C:/Users/faumac/Desktop/league AI/R_stuff/note.Rmd",
+    "project_path" : "note.Rmd",
+    "properties" : {
+        "chunk_output_type" : "inline",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

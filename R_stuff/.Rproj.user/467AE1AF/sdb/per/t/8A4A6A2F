@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1520358562035.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "8A4A6A2F",
+    "lastKnownWriteTime" : 15,
+    "last_content_update" : 1520358562035,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "3835F5C6",
+        "caption" : "all_wins_vs.matrix",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=all_wins_vs.matrix&cache_key=3835F5C6",
+        "displayedObservations" : 139,
+        "environment" : "",
+        "object" : "all_wins_vs.matrix",
+        "preview" : 0,
+        "totalObservations" : 139,
+        "variables" : 135
+    },
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

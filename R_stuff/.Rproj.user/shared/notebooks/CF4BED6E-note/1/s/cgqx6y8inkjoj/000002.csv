@@ -1,0 +1,6 @@
+"0","percentage_win_by_champ <- function(champ_name){"
+"0","  champ_data = train_data[,champ_name]"
+"0","  wins = length(champ_data[champ_data > 0])"
+"0","  losses = length(champ_data[champ_data < 0])"
+"0","  return(c(wins, losses, wins + losses, (wins/(wins + losses))))"
+"0","}"
